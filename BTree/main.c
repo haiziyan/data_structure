@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "BTree.h"
-
+#include "LinkQueue.c"
 struct Node
 {
     BTreeNode header;
@@ -14,7 +14,57 @@ void printf_data(BTreeNode *node)
         printf("%c",((struct Node*)node)->v);
     }
 }
+void pre_order_traversal(BTreeNode *root)
+{
+    if(root != NULL)
+    
+    {
+    	printf("%c",((struct Node *)root)->v);
+	pre_order_traversal(root->left);
+	pre_order_traversal(root->right);
+    }
+}
 
+void middle_order_traversal(BTreeNode *root)
+{
+    if(root != NULL)
+    {
+    	middle_order_traversal(root->left);
+	printf("%c",((struct Node *)root)->v);
+	middle_order_traversal(root->right);
+    }
+}
+
+void post_order_traversal(BTreeNode *root)
+{
+    if(root != NULL)
+    {
+    	post_order_traversal(root->left);
+	post_order_traversal(root->right);
+	printf("%c",((struct Node *)root)->v);
+    }
+}
+
+void level_order_traversal(BTreeNode *root)
+{
+    if(root != NULL)
+    {
+    	LinkQueue *queue = LinkQueue_Create();
+	if(queue != NULL)
+	{
+	    LinkQueue_Append(queue,root);
+	    while(LinkQueue_length(queue)>0)
+	    {
+	    	struct Node *node = (struct Node *)LinkQueue_Retrieve(queue);
+		printf("%c",node->v);
+		LinkQueue_Append(queue,node->header.left);
+		LinkQueue_Append(queue,node->header.right);
+
+	    }
+	}
+	LinkQueue_Destory(queue);
+    }
+}
 int main()
 {
     BTree* tree = BTree_create();
