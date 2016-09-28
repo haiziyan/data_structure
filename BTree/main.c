@@ -65,6 +65,24 @@ void level_order_traversal(BTreeNode *root)
 	LinkQueue_Destory(queue);
     }
 }
+
+void thread_via_left(BTreeNode *root, BTreeNode **pp)
+{
+    if(root != NULL && pp != NULL)
+    {
+    	if(*pp != NULL)
+	{
+	    (*pp)->left = root;
+	    *pp = NULL;
+	}
+	if(root->left == NULL)
+	{
+	    *pp = root ;
+	}
+	thread_via_left(root->left,pp);
+	thread_via_left(root->right, pp);
+    }
+}
 int main()
 {
     BTree* tree = BTree_create();
