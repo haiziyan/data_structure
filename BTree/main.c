@@ -14,6 +14,7 @@ void printf_data(BTreeNode *node)
         printf("%c",((struct Node*)node)->v);
     }
 }
+//前序遍历
 void pre_order_traversal(BTreeNode *root)
 {
     if(root != NULL)
@@ -24,7 +25,7 @@ void pre_order_traversal(BTreeNode *root)
 	pre_order_traversal(root->right);
     }
 }
-
+//中序遍历
 void middle_order_traversal(BTreeNode *root)
 {
     if(root != NULL)
@@ -34,7 +35,7 @@ void middle_order_traversal(BTreeNode *root)
 	middle_order_traversal(root->right);
     }
 }
-
+//后序遍历
 void post_order_traversal(BTreeNode *root)
 {
     if(root != NULL)
@@ -44,7 +45,7 @@ void post_order_traversal(BTreeNode *root)
 	printf("%c",((struct Node *)root)->v);
     }
 }
-
+//层次遍历二叉树#利用队列#
 void level_order_traversal(BTreeNode *root)
 {
     if(root != NULL)
@@ -65,7 +66,7 @@ void level_order_traversal(BTreeNode *root)
 	LinkQueue_Destory(queue);
     }
 }
-
+//线索化二叉树#利用结点中的空结点#
 void thread_via_left(BTreeNode *root, BTreeNode **pp)
 {
     if(root != NULL && pp != NULL)
@@ -81,6 +82,16 @@ void thread_via_left(BTreeNode *root, BTreeNode **pp)
 	}
 	thread_via_left(root->left,pp);
 	thread_via_left(root->right, pp);
+    }
+}
+//线索化二叉树#运用线性表#
+void thread_via_list(BTreeNode *root, SeqList *list)
+{
+    if(root != NULL && list != NULL)
+    {
+    	SeqList_Insert(list, (SeqListNode *)root, SeqLIist_Length(list));
+	thread_via_list(root->left,list);
+	thread_via_list(root->right,list);
     }
 }
 int main()
