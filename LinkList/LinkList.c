@@ -4,7 +4,7 @@
 
 typedef struct _tag_LinkList
 {
-    LinkListNode *header;
+    LinkListNode header;
     int length;
 }TLinkList;
 
