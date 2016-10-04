@@ -53,7 +53,7 @@ int LinkList_insert(LinkList *list, LinkListNode *node, int pos )
     if( ret )
     {
     	LinkListNode *current = (LinkListNode *)List;
-	for(i = 0; i<pos && current != NULL; i++)
+	for(i = 0; i<pos && current->next != NULL; i++)
 	{
 	    current = current->next;
 	}
@@ -88,7 +88,7 @@ LinkListNode *LinKList_delete(LinkLiist *list, int pos )
     int i = 0;
     if(List != NULL && pos >= 0 && pos < List->length )
     {
-    	LinkListNode *current t= (LinkListNode *)List;
+    	LinkListNode *current = (LinkListNode *)List;
 	for(i = 0;i < pos ; i++)
 	{
 	    current = current->next;
