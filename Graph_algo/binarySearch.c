@@ -72,6 +72,7 @@ int binary_search_ex(int a[]. int low, int high, int key)
 	if(a[mid] == key)
 	{
 	    ret = mid;
+        break;
 	}
 	else if(key < a[mid])
 	{
